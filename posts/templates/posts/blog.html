@@ -1,0 +1,20 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+    <h2><a href = "/blogs">All blogs</a></h2>
+    <b>Blog №{{ blog.id }}</b><div/>
+    <b>Rating:{{ blog.rate }}</b>
+    <p>Title: {{ blog.title }}</p>
+    <p>Description: {{ blog.description }}</p>
+
+    <div>
+        <h1 color="red">POSTS IN BLOG</h1>
+        {% for post in posts %}
+        <div>
+            <b>Post №{{ forloop.counter }}</b>
+            <div>{{ post.text }}</div>
+            <b><u><a href="{% url 'allblogs:post' post_id=post.id blog_id=blog.id %}">COMMENTS</a></u></b>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

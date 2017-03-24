@@ -1,0 +1,12 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+    <h2><a href = "/blogs/{{ blog.id }}">Back to blog</a></h2>
+    <b>{{ post.id }}</b>{{ post.rate }}<br/>
+    <p>{{ post.title }}</p>
+    <p>{{ post.description }}</p>
+    <h2 color = 'green'>COMMENTS</h2>
+    {% for com in comments %}
+        <p>{{ com }}</p>
+    {% endfor %}
+{% endblock %}
