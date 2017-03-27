@@ -30,6 +30,8 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+ACCOUNT_ACTIVATION_DAYS = 2
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -37,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'widget_tweaks',
     'core.apps.CoreConfig',
     'comments.apps.CommentsConfig',
     'posts.apps.PostsConfig'
@@ -53,6 +56,10 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'application.urls'
+
+LOGIN_URL = 'core:login'
+LOGIN_REDIRECT_URL = 'posts:allblogs'
+LOGOUT_REDIRECT_URL = 'posts:allblogs'
 
 TEMPLATES = [
     {

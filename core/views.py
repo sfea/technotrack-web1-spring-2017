@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.views.generic import CreateView
+
 
 def test(request, post_id=None, blog_id=None):
     #return HttpResponse('Test passed, post_id = {}, blog_id = {}'. format(post_id, blog_id))

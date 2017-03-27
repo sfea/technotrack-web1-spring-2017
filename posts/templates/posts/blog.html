@@ -1,19 +1,22 @@
 {% extends "core/base.html" %}
 
 {% block content %}
-    <h2><a href = "/blogs">All blogs</a></h2>
-    <b>Blog №{{ blog.id }}</b><div/>
-    <b>Rating:{{ blog.rate }}</b>
-    <p>Title: {{ blog.title }}</p>
-    <p>Description: {{ blog.description }}</p>
+    <h2><a href = "{% url 'posts:allblogs' %}">All blogs</a></h2>
+    <b>Blog №{{ object.id }}</b><div/>
+    {% if object.category %}
+        <b>Category: {{ object.category }}</b></br>
+    {% endif %}
+    <b>Rating:{{ object.rate }}</b>
+    <p>Title: {{ object.title }}</p>
+    <p>Description: {{ object.description }}</p>
 
     <div>
         <h1 color="red">POSTS IN BLOG</h1>
-        {% for post in posts %}
+        {% for post in object.post_set.all %}
         <div>
             <b>Post №{{ forloop.counter }}</b>
-            <div>{{ post.text }}</div>
-            <b><u><a href="{% url 'allblogs:post' post_id=post.id blog_id=blog.id %}">COMMENTS</a></u></b>
+            <div>Title: {{ post.title }}</div>
+            <b><u><a href="{% url 'posts:post' pk=post.id%}">MORE</a></u></b>
         </div>
         {% endfor %}
     </div>

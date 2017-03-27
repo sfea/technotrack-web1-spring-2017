@@ -1,17 +1,22 @@
 {% extends "core/base.html" %}
-{% block title %}List of blogss{% endblock %}
+{% load widget_tweaks %}
 {% block content %}
 
     <div>
-        {{ sortform }}
         <form method="get" action="/blogs/">
+            {{ sortform }}
             <input type="submit"/>
         </form>
     </div>
 
-    {% for blog in blogs %}
+    <h3><a href="{% url 'posts:createblog' %}">Create new blog</a></h3>
+
+    {% for blog in object_list %}
         <b>Blog №{{ blog.id }}: </b>
-            <a href="{% url 'allblogs:blog' blog_id=blog.id %}">{{blog.title}}</a>
+            <a href="{% url 'posts:blog' pk=blog.id%}">{{blog.title}}</a>
+            {% if blog.author == user %}
+                <a href="{% url 'posts:editblog' pk=blog.id%}">Edit blog</a>
+            {% endif %}
         <br/>
     {% endfor %}
 {% endblock %}

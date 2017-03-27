@@ -5,7 +5,15 @@
         </title>
     </head>
     <body>
-        <h2>{% block title %} Hello, {{ user.username }}{% endblock %}</h2>
+        <h2>
+            {% block title %}
+                {% if user.is_anonymous %}
+                    <a href="{% url 'core:login' %}">Please, login</a>
+                {% else %}
+                    Hello, {{ user.username }}!
+                    <a href="{% url 'core:logout' %}">Logout</a>
+                {% endif %}
+            {% endblock %}</h2>
         {% block content %} {% endblock %}
     </body>
 </html>
