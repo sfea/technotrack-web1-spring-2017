@@ -2,9 +2,9 @@
 
 {% block content %}
     <h2><a href = "{% url 'posts:allblogs' %}">All blogs</a></h2>
-    <b>Blog №{{ object.id }}</b><div/>
+    <b>Author: {{ object.author }}</b><div/>
     {% if object.category %}
-        <b>Category: {{ object.category }}</b></br>
+        <b>Category: {{ object.category.title }}</b></br>
     {% endif %}
     <b>Rating:{{ object.rate }}</b>
     <p>Title: {{ object.title }}</p>
@@ -12,6 +12,7 @@
 
     <div>
         <h1 color="red">POSTS IN BLOG</h1>
+        <a href="{% url 'posts:createpost' blog_id=object.id %}">Add new post</a>
         {% for post in object.post_set.all %}
         <div>
             <b>Post №{{ forloop.counter }}</b>

@@ -1,12 +1,16 @@
 {% extends "core/base.html" %}
 
 {% block content %}
-    <h2><a href = "{% url 'posts:allblogs' %}">Back to blog</a></h2>
-    <b>Post number: {{ object.id }}, rate: {{ object.rate }}</b><br/>
+    <h2><a href = "{% url 'posts:allblogs' %}">All blogs</a></h2>
+    {% if post.author == user %}
+        <h1><a href="{% url 'posts:editpost' pk=post.id %}">Edit</a></h1>
+    {% endif %}
+    <b>Author: {{ object.author }}, rate: {{ object.rate }}</b><br/>
     <p>Title: {{ object.title }}</p>
     <p>Text: {{ object.text }}</p>
     <h2 color = 'green'>COMMENTS</h2>
+    <a href="{% url 'posts:addcomment' post_id=object.id%}">Add comment</a>
     {% for com in object.comment_set.all %}
-        <p>Comment №{{ forloop.counter }}: {{ com }}</p>
+        <p>Comment from {{ com.author }}: {{ com }}</p>
     {% endfor %}
 {% endblock %}

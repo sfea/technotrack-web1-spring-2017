@@ -8,3 +8,6 @@ class Comment(models.Model):
     comment = models.TextField(max_length=255)
     post = models.ForeignKey('posts.Post')
     author = models.ForeignKey(settings.AUTH_USER_MODEL)
+
+    def __unicode__(self):
+        return self.comment

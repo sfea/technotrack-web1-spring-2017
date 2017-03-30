@@ -16,8 +16,11 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
+from posts.views import MainPage
+
 urlpatterns = [
     url(r'^', include('posts.urls', namespace='posts')),
+    url(r'^$', MainPage.as_view(), name='homepage'),
     url(r'^admin/', admin.site.urls),
     url(r'^core/', include('core.urls', namespace="core")),
 ]
