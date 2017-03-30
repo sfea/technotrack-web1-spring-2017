@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.conf.urls import url
-from posts.views import BlogView, PostView, BlogsList, CreateBlog, UpdateBlog, CreatePost, UpdatePost, CreateComment
+from posts.views import BlogView, PostView, BlogsList, CreateBlog, UpdateBlog, CreatePost, UpdatePost, CreateComment, \
+    UpdateComment
 from django.contrib.auth.decorators import login_required
 
 urlpatterns = [
@@ -12,4 +13,5 @@ urlpatterns = [
     url(r'^posts/(?P<pk>\d+)/$', PostView.as_view(), name="post"),
     url(r'^blogs/(?P<pk>\d+)/edit/$', UpdateBlog.as_view(), name="editblog"),
     url(r'^posts/(?P<post_id>\d+)/new_comment$', login_required(CreateComment.as_view()), name="addcomment"),
+    url(r'^posts/(?P<post_id>\d+)/comment/(?P<pk>\d+)/edit$', UpdateComment.as_view(), name="editcomment"),
 ]

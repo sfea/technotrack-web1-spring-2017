@@ -43,6 +43,7 @@ class UpdateBlog(UpdateView):
     template_name = "posts/editblog.html"
     model = Blog
     fields = ('category', 'title', 'description')
+
     def get_success_url(self):
         return reverse('posts:allblogs')
 
@@ -55,11 +56,26 @@ class UpdatePost(UpdateView):
     template_name = "posts/editpost.html"
     model = Post
     fields = ('title', 'text', 'rate')
+
     def get_success_url(self):
         return reverse('posts:allblogs')
 
     def get_queryset(self):
         return super(UpdatePost, self).get_queryset().filter(author=self.request.user)
+
+
+class UpdateComment(UpdateView):
+
+    template_name = "posts/editcomment.html"
+    model = Comment
+    fields = ('comment', )
+
+    def get_success_url(self):
+        return reverse('posts:allblogs')
+
+    def get_queryset(self):
+        return super(UpdateComment, self).get_queryset().filter(author=self.request.user)
+
 
 class CreateBlog(CreateView):
 

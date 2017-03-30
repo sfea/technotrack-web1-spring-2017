@@ -11,6 +11,11 @@
     <h2 color = 'green'>COMMENTS</h2>
     <a href="{% url 'posts:addcomment' post_id=object.id%}">Add comment</a>
     {% for com in object.comment_set.all %}
-        <p>Comment from {{ com.author }}: {{ com }}</p>
+        <p>
+            Comment from {{ com.author }}: {{ com }}
+            {% if com.author == user %}
+                <a href="{% url 'posts:editcomment' post_id=post.id pk=com.id %}">Edit</a>
+            {% endif %}
+        </p>
     {% endfor %}
 {% endblock %}
