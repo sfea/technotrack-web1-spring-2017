@@ -1,21 +1,49 @@
 {% extends "core/base.html" %}
 
 {% block content %}
-    <h2><a href = "{% url 'posts:allblogs' %}">All blogs</a></h2>
+    <h2>
+        <a href = "{% url 'posts:allblogs' %}"><span class="glyphicon glyphicon-menu-left"></span> All blogs</a>
+    </h2>
     {% if post.author == user %}
-        <h1><a href="{% url 'posts:editpost' pk=post.id %}">Edit</a></h1>
+        <h1>
+            <a href="{% url 'posts:editpost' pk=post.id %}">
+                <button class="btn btn-lg btn-primary" type="button">
+                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>Edit
+                </button>
+            </a>
+        </h1>
     {% endif %}
-    <b>Author: {{ object.author }}, rate: {{ object.rate }}</b><br/>
-    <p>Title: {{ object.title }}</p>
-    <p>Text: {{ object.text }}</p>
-    <h2 color = 'green'>COMMENTS</h2>
-    <a href="{% url 'posts:addcomment' post_id=object.id%}">Add comment</a>
+    <article>
+        <ul style="list-style-type: none;">
+            <li>
+                <u>Author</u>: {{ object.author }}
+            </li>
+            <li>
+                <u>Rate</u>: {{ object.rate }}
+            </li>
+            <li>
+                <u>Title</u>: {{ object.title }}
+            </li>
+            <li>
+                <u>Text</u>: {{ object.text }}
+            </li>
+        </ul>
+        <h2 color = 'green'><u>COMMENTS</u></h2>
+    </article>
+    <a href="{% url 'posts:addcomment' post_id=object.id%}">
+        <button class="btn btn btn-primary" type="button">
+            <span class="glyphicon glyphicon-plus"></span> Add comment
+        </button>
+    </a>
     {% for com in object.comment_set.all %}
         <p>
-            Comment from {{ com.author }}: {{ com }}
+            {{ com.author }}: {{ com }}
             {% if com.author == user %}
-                <a href="{% url 'posts:editcomment' post_id=post.id pk=com.id %}">Edit</a>
+                <a href="{% url 'posts:editcomment' post_id=post.id pk=com.id %}">
+                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                </a>
             {% endif %}
         </p>
+        <hr>
     {% endfor %}
 {% endblock %}

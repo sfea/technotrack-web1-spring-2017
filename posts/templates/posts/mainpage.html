@@ -1,6 +1,28 @@
 {% extends "core/base.html" %}
 {% load widget_tweaks %}
+
+{% block title %}
+        <header style="color: white;">
+            <h1 class="text-center">
+                <p style="margin-top: 200px;">Getting started!</p>
+            </h1>
+            <h3 class="text-center">
+                Blogs:{{ blog_quant }}, posts: {{ post_quant }}, comments: {{ comment_quant }}
+            </h3>
+        </header>
+{% endblock %}
 {% block content %}
-    <h3><a href="{% url 'posts:allblogs' %}">All blogs</a></h3>
-    {{ form }}
+        <h3 class="text-center">
+            <a href="{% url 'posts:allblogs' %}">
+                <button class="btn btn-lg btn-info" type="button">
+                    <span class="glyphicon glyphicon-list"></span> All blogs
+                </button>
+            </a>
+        </h3>
+        <img src="static/For site.jpg" style="position: fixed; top: 0; left: 0; min-width: 100%; min-height: 100%; z-index: -600" alt="">
+{% endblock %}
+{% block footer %}
+    <footer class="text-center" style="color: lightgrey;">
+        <i>All rights reserved(c)</i>
+    </footer>
 {% endblock %}

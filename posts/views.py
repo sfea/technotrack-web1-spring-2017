@@ -17,6 +17,7 @@ class MainPage(TemplateView):
         context = super(MainPage, self).get_context_data()
         context['blog_quant'] = Blog.objects.all().count()
         context['post_quant'] = Post.objects.all().count()
+        context['comment_quant'] = Comment.objects.all().count()
         return context
 
 
@@ -31,6 +32,7 @@ class SortForm(forms.Form):
         required=False
     )
     search = forms.CharField(required=False)
+
 
 class BlogForm(forms.ModelForm):
 
@@ -97,6 +99,7 @@ class CreatePost(CreateView):
     template_name = "posts/addpost.html"
     model = Post
     fields = ('title', 'text', 'rate')
+
     def get_success_url(self):
         return reverse('posts:allblogs')
 

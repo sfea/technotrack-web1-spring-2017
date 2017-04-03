@@ -1,20 +1,54 @@
-<html>
-    <head>
+{% load static %}
+
+<html xmlns="http://www.w3.org/1999/html">
+    <header>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{% static 'core/bootstrap/dist/css/bootstrap.min.css' %}">
         <title>
             My best site
         </title>
-    </head>
+        {% block title %}
+        {% endblock %}
+    </header>
     <body>
-        <h2>
-            {% block title %}
-                {% if user.is_anonymous %}
-                    <div><a href="{% url 'core:login' %}">Please, login</a></div>
-                    <div>Don't have an account? Please, <a href="{% url 'core:register' %}">register</a></div>
-                {% else %}
+        <script src="{% static 'core/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <div class="container theme-showcase" role="main" style="max-width: 400px;">
+            <div class="jumbotron">
+                <h2 class="text-center">
+                    {% if user.is_anonymous %}
+                    <div>You may</div>
+                    </br>
+                    <button class="btn btn-lg btn-success" type="button">
+                        <a href="{% url 'core:login' %}" style="color: white;">Login</a>
+                    </button>
+                    or
+                    <button class="btn btn-lg btn-primary" type="button">
+                        <a href="{% url 'core:register' %}" style="color: white;">Register</a>
+                    </button>
+                    {% else %}
                     Hello, {{ user.username }}!
-                    <a href="{% url 'core:logout' %}">Logout</a>
-                {% endif %}
-            {% endblock %}</h2>
-        {% block content %} {% endblock %}
+                    <button class="btn btn-danger" type="button">
+                        <a href="{% url 'core:logout' %}" style="color: white;">Logout</a>
+                    </button>
+                    {% endif %}
+                </h2>
+            </div>
+
+
+            <div class="text-center">
+                {% block content %}
+                {% endblock %}<br/>
+            </div>
+
+        </div>
+
+        {% block footer %}
+                <footer class="text-center">
+                    <i>All rights reserved(c)</i>
+                </footer>
+        {% endblock %}
     </body>
 </html>

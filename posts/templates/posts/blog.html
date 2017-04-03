@@ -1,24 +1,46 @@
 {% extends "core/base.html" %}
 
 {% block content %}
-    <h2><a href = "{% url 'posts:allblogs' %}">All blogs</a></h2>
-    <b>Author: {{ object.author }}</b><div/>
-    {% if object.category %}
-        <b>Category: {{ object.category.title }}</b></br>
-    {% endif %}
-    <b>Rating:{{ object.rate }}</b>
-    <p>Title: {{ object.title }}</p>
-    <p>Description: {{ object.description }}</p>
-
+    <h2>
+        <a href = "{% url 'posts:allblogs' %}">
+            <span class="glyphicon glyphicon-menu-left"></span> All blogs
+        </a>
+    </h2>
+    <article>
+        <ul style="list-style-type: none;">
+            <li>
+                <u>Author</u>: {{ object.author }}
+            </li>
+            {% if object.category %}
+                <li>
+                    <u>Category</u>: {{ object.category.title }}
+                </li>
+            {% endif %}
+            <li>
+                <u>Rating</u>: {{ object.rate }}
+            </li>
+            <li>
+                <u>Title</u>: {{ object.title }}
+            </li>
+            <li>
+                <u>Description</u>: {{ object.description }}
+            </li>
+        </ul>
+    </article>
     <div>
         <h1 color="red">POSTS IN BLOG</h1>
-        <a href="{% url 'posts:createpost' blog_id=object.id %}">Add new post</a>
+        <a href="{% url 'posts:createpost' blog_id=object.id %}">
+            <button class="btn btn btn-primary" type="button">
+                <span class="glyphicon glyphicon-plus"></span> Add new post
+            </button>
+        </a>
         {% for post in object.post_set.all %}
-        <div>
-            <b>Post №{{ forloop.counter }}</b>
+        <article>
+            <b>Post from {{ post.author }}</b>
             <div>Title: {{ post.title }}</div>
-            <b><u><a href="{% url 'posts:post' pk=post.id%}">MORE</a></u></b>
-        </div>
+            <b><u><a href="{% url 'posts:post' pk=post.id%}">MORE...</a></u></b>
+            <hr>
+        </article>
         {% endfor %}
     </div>
 {% endblock %}
