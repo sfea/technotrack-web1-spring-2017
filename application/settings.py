@@ -58,8 +58,8 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'application.urls'
 
 LOGIN_URL = 'core:login'
-LOGIN_REDIRECT_URL = 'homepage'
-LOGOUT_REDIRECT_URL = 'homepage'
+LOGIN_REDIRECT_URL = 'posts:allblogs'
+LOGOUT_REDIRECT_URL = 'posts:allblogs'
 
 TEMPLATES = [
     {

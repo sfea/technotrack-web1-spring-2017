@@ -1,15 +1,25 @@
 {% extends "core/base.html" %}
-
+{% load widget_tweaks %}
 {% block content %}
     <h2>
-        <a href = "{% url 'posts:allblogs' %}">
+        <a href = "{% url 'posts:allblogs' %}" class="btn btn-lg btn-default">
             <span class="glyphicon glyphicon-menu-left"></span> All blogs
         </a>
     </h2>
 
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
+        {% for field in form %}
+            {% if field.label == 'Category' %}
+                <label>{{ field.label }}</label>
+                {{ field|add_class:"chosen-select" }}
+            {% else %}
+                <div class="form-group">
+                    <label>{{ field.label }}</label>
+                    {{ field|add_class:'form-control' }}
+                </div>
+            {% endif %}
+        {% endfor %}
         <input type="submit" class="btn btn-lg btn-success">
     </form>
 {% endblock %}

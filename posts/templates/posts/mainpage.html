@@ -1,6 +1,10 @@
 {% extends "core/base.html" %}
 {% load widget_tweaks %}
 
+
+{% block navbar %}
+{% endblock %}
+
 {% block title %}
         <header style="color: white;">
             <h1 class="text-center">
@@ -12,6 +16,27 @@
         </header>
 {% endblock %}
 {% block content %}
+        <div class="jumbotron login">
+            <h2 class="text-center">
+                {% if user.is_anonymous %}
+                <div style="margin-bottom: 10px;">You may</div>
+                <a href="{% url 'core:login' %}" style="color: white;" >
+                    <button class="btn btn-lg btn-success" type="button">Login</button>
+                </a>
+                or
+                <a href="{% url 'core:register' %}" style="color: white;">
+                    <button class="btn btn-lg btn-primary" type="button">Register</button>
+                </a>
+                {% else %}
+                <div>
+                    <h2>Hello, {{ user.username }}!</h2>
+                </div>
+                <a href="{% url 'core:logout' %}" style="color: white;">
+                    <button class="btn btn-danger" type="button">Logout</button>
+                </a>
+                {% endif %}
+            </h2>
+        </div>
         <h3 class="text-center">
             <a href="{% url 'posts:allblogs' %}">
                 <button class="btn btn-lg btn-info" type="button">
@@ -22,7 +47,4 @@
         <img src="static/For site.jpg" style="position: fixed; top: 0; left: 0; min-width: 100%; min-height: 100%; z-index: -600" alt="">
 {% endblock %}
 {% block footer %}
-    <footer class="text-center" style="color: lightgrey;">
-        <i>All rights reserved(c)</i>
-    </footer>
 {% endblock %}

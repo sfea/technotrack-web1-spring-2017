@@ -1,0 +1,10 @@
+{% for comment in object.comment_set.all %}
+    <div style="border: dotted;">
+        <div style="display: inline-block">
+            <h4 style="color: brown">
+                <span style="color: cornflowerblue">{{ comment.created_at }} {{ comment.author }}:</span> {{ comment.comment }}
+            </h4>
+            <div>{{ comment.text }}</div>
+        </div>
+    </div>
+{% endfor %}
