@@ -1,5 +1,5 @@
 $(document).ready(
-
+//-----------------adding CSRF to meta-------------------------------//
     function() {
 
         function csrfSafeMethod(method) {
@@ -15,20 +15,27 @@ $(document).ready(
             }
         });
 
-        $('.chosen-select').chosen();
-        $('.chosen-container').chosen();
 
+//----------------Autocomplete---------------------------------------//
+        $('.chosen-select').chosen();
+
+//---------------Comments autoload-----------------------------------//
         $('.autoload').each(function () {
             $(this).load($(this).attr('data-url'));
         });
-    });
+//---------------Likes----------------------------------------------//
 
-$(document).on('click', 'span.ajaxlike', function (e) {
-    var data = $(this).data();
-    console.log(data.url, data.postid);
-    $.ajax({url: data.url, method: "POST"}).done(function(data, status, response){
-        console.log(response);
-        $('#likes-' + data.postid).html(response);
+        $(document).on('click', 'span.ajaxlike', function (e) {
+            var data = $(this).data();
+            console.log(data.url, data.postid);
+            $.ajax({url: data.url, method: "POST"}).done(function(request_data, status, response){
+                $('#likes-' + data.postid).html(request_data);
+            });
+            return false;
+        });
+
+//--------------Modal forms-----------------------------------------//
+        $('#myModal').on('shown.bs.modal', function () {
+            $('#myInput').focus();
+        })
     });
-    return false;
-});

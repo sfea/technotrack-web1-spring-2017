@@ -14,6 +14,7 @@ class Like(models.Model):
     updated_at = models.DateTimeField(default=now, blank=True)
 
 
+
 class Category(models.Model):
     title = models.TextField(max_length=255)
 
