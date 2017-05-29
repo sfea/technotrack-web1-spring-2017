@@ -1,5 +1,5 @@
 $(document).ready(
-//-----------------adding CSRF to meta-------------------------------//
+    //-----------------adding CSRF to meta-------------------------------//
     function() {
 
         function csrfSafeMethod(method) {
@@ -16,14 +16,14 @@ $(document).ready(
         });
 
 
-//----------------Autocomplete---------------------------------------//
+    //----------------Autocomplete---------------------------------------//
         $('.chosen-select').chosen();
 
-//---------------Comments autoload-----------------------------------//
+    //---------------Comments autoload-----------------------------------//
         $('.autoload').each(function () {
             $(this).load($(this).attr('data-url'));
         });
-//---------------Likes----------------------------------------------//
+    //---------------Likes----------------------------------------------//
 
         $(document).on('click', 'span.ajaxlike', function (e) {
             var data = $(this).data();
@@ -34,7 +34,7 @@ $(document).ready(
             return false;
         });
 
-//--------------Modal forms-----------------------------------------//
+    //--------------Modal forms-----------------------------------------//
         $('#myModal').on('shown.bs.modal', function () {
             $('#myInput').focus();
         })

@@ -58,7 +58,7 @@ class BlogView(DetailView):
 
 class CreateBlog(CreateView):
 
-    template_name = "posts/dialog_window.html"
+    template_name = "posts/addblog.html"
     model = Blog
     fields = ('category', 'title', 'description', 'rate')
 

@@ -2,7 +2,6 @@
 from __future__ import unicode_literals
 
 from django.utils.timezone import now
-from datetime import datetime
 from django.db import models
 from django.conf import settings
 
