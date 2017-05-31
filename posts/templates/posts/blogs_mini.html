@@ -1,8 +1,5 @@
-{% extends "core/base.html" %}
-{% load static %}
-{% load widget_tweaks %}
 {% block content %}
-
+    <a href="{% url posts:allblogs %}">Back to blogs!!!!</a>
     <div>
         <form method="get" action="/blogs/" class="form-inline">
             {% for field in sortform %}
@@ -49,6 +46,4 @@
             {% endfor %}
         </div>
     </div>
-
-    <a href="{% url 'posts:allblogsmini' %}">Версия для слабого интернета</a>
 {% endblock %}

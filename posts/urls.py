@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 
 urlpatterns = [
     url(r'^blogs/$', BlogsList.as_view(), name="allblogs"),
+    url(r'^blogs/blogs_mini/$', BlogsList.as_view(), name="allblogsmini"),
 
     url(r'^blogs/(?P<pk>\d+)/$', BlogView.as_view(), name="blog"),
     url(r'^blogs/(?P<pk>\d+)/delete/$', DeleteBlog.as_view(), name="deleteblog"),
