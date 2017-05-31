@@ -89,7 +89,7 @@ DATABASES = {
         'NAME': 'TRACK_BASE',
         'USER': 'fedor',
         'PASSWORD': 'ubuntu14',
-        'HOST': 's37116.vdi.mipt.ru',
+        'HOST': 'localhost',
     }
 }
 
@@ -125,6 +125,8 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+ALLOWED_HOSTS = "s37116.vdi.mipt.ru"
 
 
 # Static files (CSS, JavaScript, Images)
