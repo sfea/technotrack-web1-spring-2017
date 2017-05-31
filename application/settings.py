@@ -89,7 +89,7 @@ DATABASES = {
         'NAME': 'TRACK_BASE',
         'USER': 'fedor',
         'PASSWORD': 'ubuntu14',
-        'HOST': 'localhost',
+        'HOST': 's37116.vdi.mipt.ru',
     }
 }
 
