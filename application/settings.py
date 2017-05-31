@@ -25,7 +25,7 @@ SECRET_KEY = '&s+&f-htsjsb*)ip&ho0vj)s!_9v804o&3&n=yk$25m-=l9o$&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['s37116.vdi.mipt.ru', ]
 
 
 # Application definition
@@ -125,9 +125,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
-ALLOWED_HOSTS = "s37116.vdi.mipt.ru"
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
