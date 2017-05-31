@@ -33,7 +33,6 @@ $(document).ready(function() {
         });
     //---------------Dislikes----------------------------------------------//
         $(document).on('click', 'span.ajaxdislike', function (e) {
-            alert("Hey!");
             var data = $(this).data();
             console.log(data.url, data.postid);
             $.ajax({url: data.url, method: "POST"}).done(function(request_data, status, response){
