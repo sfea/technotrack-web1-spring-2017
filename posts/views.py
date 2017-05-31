@@ -7,9 +7,10 @@ from django.views.generic import CreateView, DeleteView
 from django.views.generic import TemplateView
 
 from posts.forms import SortForm, BlogForm
-from .models import Blog, Post, Category, Like
+from .models import Blog, Post, Category, Like, Dislike
 from comments.models import Comment
 from django.views.generic import ListView, DetailView, UpdateView
+
 
 class MainPage(TemplateView):
 
@@ -21,6 +22,7 @@ class MainPage(TemplateView):
         context['post_quant'] = Post.objects.all().count()
         context['comment_quant'] = Comment.objects.all().count()
         return context
+
 
 class BlogsList(ListView):
 
@@ -43,8 +45,11 @@ class BlogsList(ListView):
             if self.sortform.cleaned_data['sort']:
                 pass
             else:
-                self.sortform.cleaned_data['sort'] = 'title'
-            qs = qs.order_by(self.sortform.cleaned_data['sort'])
+                self.sortform.cleaned_data['sort'] = 'updated_at'
+            if self.sortform.cleaned_data['sort'] == 'updated_at':
+                qs = qs.order_by(self.sortform.cleaned_data['sort']).reverse()
+            else:
+                qs = qs.order_by(self.sortform.cleaned_data['sort'])
             if self.sortform.cleaned_data['search']:
                 qs = qs.filter(title__icontains=self.sortform.cleaned_data['search'])
         return qs
@@ -55,6 +60,7 @@ class BlogView(DetailView):
     queryset = Blog.objects.all()
     template_name = 'posts/blog.html'
     blogform = None
+
 
 class CreateBlog(CreateView):
 
@@ -76,6 +82,7 @@ class DeleteBlog(DeleteView):
 
     def get_success_url(self):
         return resolve_url('posts:allblogs')
+
 
 class UpdateBlog(UpdateView):
 
@@ -121,6 +128,7 @@ class UpdatePost(UpdateView):
     def get_queryset(self):
         return super(UpdatePost, self).get_queryset().filter(author=self.request.user)
 
+
 class DeletePost(DeleteView):
     template_name = "posts/post_confirm_delete.html"
     model = Post
@@ -144,6 +152,7 @@ class UpdateComment(UpdateView):
 
     def get_queryset(self):
         return super(UpdateComment, self).get_queryset().filter(author=self.request.user)
+
 
 class PostView(CreateView):
 
@@ -169,6 +178,7 @@ class PostView(CreateView):
     def get_success_url(self):
         return resolve_url('posts:post', pk=self.postobject.pk)
 
+
 class PostLikeAjaxView(View):
 
     def dispatch(self, request, pk=None, *args, **kwargs):
@@ -182,6 +192,22 @@ class PostLikeAjaxView(View):
             new_like.author = self.request.user
             new_like.save()
         return HttpResponse(Like.objects.filter(post=self.postobject).count())
+
+
+class PostDislikeAjaxView(View):
+
+    def dispatch(self, request, pk=None, *args, **kwargs):
+        self.postobject = get_object_or_404(Post, id=pk)
+        return super(PostDislikeAjaxView, self).dispatch(request, *args, **kwargs)
+
+    def post(self, request):
+        if not Dislike.objects.all().filter(post=self.postobject).filter(author=self.request.user).exists():
+            new_dislike = Dislike()
+            new_dislike.post = self.postobject
+            new_dislike.author = self.request.user
+            new_dislike.save()
+        return HttpResponse(Dislike.objects.filter(post=self.postobject).count())
+
 
 class PostCommentsView(DetailView):
 

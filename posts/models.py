@@ -5,6 +5,7 @@ from django.utils.timezone import now
 from django.db import models
 from django.conf import settings
 
+
 class Like(models.Model):
     post = models.ForeignKey('posts.Post')
     author = models.ForeignKey(settings.AUTH_USER_MODEL)
@@ -12,6 +13,13 @@ class Like(models.Model):
     created_at = models.DateTimeField(default=now, blank=True)
     updated_at = models.DateTimeField(default=now, blank=True)
 
+
+class Dislike(models.Model):
+    post = models.ForeignKey('posts.Post')
+    author = models.ForeignKey(settings.AUTH_USER_MODEL)
+
+    created_at = models.DateTimeField(default=now, blank=True)
+    updated_at = models.DateTimeField(default=now, blank=True)
 
 
 class Category(models.Model):

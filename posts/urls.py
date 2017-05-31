@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.conf.urls import url
 from posts.views import BlogView, PostView, BlogsList, CreateBlog, UpdateBlog, CreatePost, UpdatePost, DeleteBlog, \
-    DeletePost, PostLikeAjaxView, PostCommentsView
+    DeletePost, PostLikeAjaxView, PostCommentsView, PostDislikeAjaxView
 from django.contrib.auth.decorators import login_required
 
 urlpatterns = [
@@ -18,4 +18,5 @@ urlpatterns = [
     url(r'^(?P<pk>\d+)/posts/new_post/$', login_required(CreatePost.as_view()), name="createpost"),
     url(r'^posts/(?P<pk>\d+)/edit/$', login_required(UpdatePost.as_view()), name="editpost"),
     url(r'^posts/(?P<pk>\d+)/post_like/$', login_required(PostLikeAjaxView.as_view()), name="postlike"),
+    url(r'^posts/(?P<pk>\d+)/post_dislike/$', login_required(PostDislikeAjaxView.as_view()), name="postdislike"),
 ]

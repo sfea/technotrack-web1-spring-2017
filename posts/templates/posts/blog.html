@@ -44,17 +44,27 @@
             <p class="blog-post-meta" style="margin-bottom: 10px;">
                 {{ post.created_at }} by <b>{{ post.author }}</b>
             </p>
-            <div>
-                <b>
-                    <u>
-                        <a data-url="" class="btn btn-lg btn-default" href="{% url 'posts:editpost' pk=post.id%}">Edit</a>
-                        <a class="btn btn-lg btn-default" href="{% url 'posts:deletepost' pk=post.id%}">Delete</a>
-                    </u>
-                </b>
-            </div>
+            {% if user == post.author %}
+                <div>
+                    <b>
+                        <u>
+                            <a data-url="" class="btn btn-lg btn-default" href="{% url 'posts:editpost' pk=post.id%}">Edit</a>
+                            <a class="btn btn-lg btn-default" href="{% url 'posts:deletepost' pk=post.id%}">Delete</a>
+                        </u>
+                    </b>
+                </div>
+            {% endif %}
             <div style="position: relative;">
-                <span id="likes-{{ post.id }}" class="glyphicon glyphicon-heart-empty ajaxlike"
+
+                <span id="likes-{{ post.id }}" class="glyphicon glyphicon-thumbs-up ajaxlike"
                       data-url="{% url 'posts:postlike' pk=post.id%}"
+                      data-postid="{{ post.id }}"
+                      style="font-size: 200%; position: absolute; bottom: 10px; right: 50px; color: red;">
+                </span>
+
+
+                <span id="dislikes-{{ post.id }}" class="glyphicon glyphicon-thumbs-down ajaxdislike"
+                      data-url="{% url 'posts:postdislike' pk=post.id%}"
                       data-postid="{{ post.id }}"
                       style="font-size: 200%; position: absolute; bottom: 10px; right: 0; color: red;">
                 </span>

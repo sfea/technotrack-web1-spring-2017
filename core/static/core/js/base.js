@@ -1,7 +1,5 @@
-$(document).ready(
-    //-----------------adding CSRF to meta-------------------------------//
-    function() {
-
+$(document).ready(function() {
+        //-----------------adding CSRF to meta-------------------------------//
         function csrfSafeMethod(method) {
             // these HTTP methods do not require CSRF protection
             return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
@@ -33,8 +31,17 @@ $(document).ready(
             });
             return false;
         });
-
-    //--------------Modal forms-----------------------------------------//
+    //---------------Dislikes----------------------------------------------//
+        $(document).on('click', 'span.ajaxdislike', function (e) {
+            alert("Hey!");
+            var data = $(this).data();
+            console.log(data.url, data.postid);
+            $.ajax({url: data.url, method: "POST"}).done(function(request_data, status, response){
+                $('#dislikes-' + data.postid).html(request_data);
+            });
+            return false;
+        });
+    // --------------Modal forms-----------------------------------------//
         $('#myModal').on('shown.bs.modal', function () {
             $('#myInput').focus();
         })

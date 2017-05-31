@@ -7,6 +7,7 @@ class SortForm(forms.Form):
 
     sort = forms.ChoiceField(
         choices=(
+            ('updated_at', u'Date'),
             ('title', u'Title'),
             ('rate', u'Rate'),
             ('description', u'Description'),
