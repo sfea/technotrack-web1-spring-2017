@@ -25,7 +25,7 @@ SECRET_KEY = '&s+&f-htsjsb*)ip&ho0vj)s!_9v804o&3&n=yk$25m-=l9o$&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['s37116.vdi.mipt.ru', ]
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
